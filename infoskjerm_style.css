@@ -1,0 +1,27 @@
+
+header {
+	padding-top: 20px;
+	padding-bottom: 20px;
+
+
+
+	background-color: #FF0000;
+}
+
+h1#mainhead {
+	font-family: "Arial", Arial, Sans-serif; 
+	font-size: 72;
+
+
+	color: #FFFFFF;
+	text-align: center;
+}
+
+h1 {
+	font-family: "Arial", Arial, Sans-serif; 
+	font-size: 72;
+}
+
+p {
+	font-family: "Arial", Arial, Sans-serif; 
+}
