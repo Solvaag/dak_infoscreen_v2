@@ -10,18 +10,31 @@ header {
 
 h1#mainhead {
 	font-family: "Arial", Arial, Sans-serif; 
-	font-size: 72;
+	font-size: 4em;
 
 
 	color: #FFFFFF;
 	text-align: center;
 }
 
+h1#upchead {
+	font-family: "Arial", Arial, Sans-serif; 
+	font-size: 4em;
+	text-align: center;
+
+	padding-top: 20px;
+	padding-bottom: 20px;
+
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+
 h1 {
 	font-family: "Arial", Arial, Sans-serif; 
-	font-size: 72;
+	font-size: 3.5em;
 }
 
 p {
 	font-family: "Arial", Arial, Sans-serif; 
+	font-size: 2em;
 }
