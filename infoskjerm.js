@@ -125,12 +125,14 @@ function display(divID, trackID, dateobject) {
 	} else {
 		var div = document.getElementById(divID);
 		var h1 = document.createElement("h1");
+
 		var node = document.createTextNode(""+ currentdate.date +" " + monthnor[currentdate.month] + "" );
 		h1.appendChild(node);
 		div.appendChild(h1);
 		for (var i = 0; i < catcher.length; i++) {
 		
 		var h1 = document.createElement("h1");
+		h1.setAttribute("id","evtitle");
 		var node = document.createTextNode("" + catcher[i].navn + "");
 		h1.appendChild(node);
 		var prom = document.createElement("p");
