@@ -2,19 +2,13 @@
 // fields
 
 var track = 1;
-var getdate = new Date();
-var currentdate = {
-	year: getdate.getFullYear(),
-	month: getdate.getMonth() +1,
-	date: getdate.getDate(),
-	day: getdate.getDay()
-}
-var monthnor = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Des"];
+var monthnor = ["Twilight Zone","Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Des"];
 var daynor = ["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"];
 
 var information = {}
 
 function main() {
+	
 	update_today();
 	update_upcoming();
 	var daily = setInterval(check_hour, 3600000);
@@ -26,25 +20,48 @@ function main() {
 	
 }
 
+function virtual_time (argtrack) {
+	var process = new Date();
+
+	if ( argtrack != 0) {
+		var input = process.getDate();
+		input += argtrack;
+		process.setDate(input);
+	}
+
+	
+	var currentdate = {
+
+	year: process.getFullYear(),
+	month: process.getMonth() + 1,
+	date: process.getDate(),
+	day: process.getDay()
+	}
+
+	return currentdate;
+}
+
 function check_hour() {
-	if (getdate.getHours == 4) {
+	timecheck = virtual_time(0);
+	if (timecheck.getHours == 4) {
 		update_today();
 	}
 }
 
 function update_today() {
+	var dateobject = virtual_time(0);
 	// write text for today's events.
-	parse (currentdate, 0);
-	display("today", 0);
+	parse (dateobject, 0);
+	display("today", 0, dateobject);
 	console.log("Update today!");
 }
 
 function update_upcoming() {
 	// write text for upcoming events
 	// use track to cycle through days
-
-parse(currentdate, track);
-display("upcoming", track);
+	var dateobject = virtual_time(track);
+parse(dateobject, track);
+display("upcoming", track, dateobject);
 console.log(track);
 track++; 
 if ( track > 6) track = 1;
@@ -66,6 +83,9 @@ function parse(argdate, argtrack) {
  	 xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   	}
   	
+  	console.log("This is what I got:");
+  	console.log(argdate);
+
   	if (argdate.month < 10) 
   		{ xmlhttp.open("GET","fetchxml.php?year=" + argdate.year + "&month=0" + argdate.month + "&date="+ (argdate.date + argtrack) +"", false);
   			console.log("fetchxml.php?year=" + argdate.year + "&month=0" + argdate.month + "&date="+ (argdate.date + argtrack) +"");
@@ -83,10 +103,10 @@ function parse(argdate, argtrack) {
 	information[argtrack] = xmlDoc;
 }
 
-function display(divID, trackID) {
+function display(divID, trackID, dateobject) {
 	// ARGS: divID, track (0 hvis today)
 	// edit and add stuff to divs
-
+	var currentdate = dateobject;
 	// h1 for event
 	// p rom
 	// p for start og slutt
@@ -99,13 +119,13 @@ function display(divID, trackID) {
 	if (catcher.length == 0) {
 		var div = document.getElementById(divID);
 		var h1 = document.createElement("h1");
-		var node = document.createTextNode("Ingen arrangement - "+ daynor[ (currentdate.day + trackID - 1) ] +" "+ (currentdate.date + trackID) +" " + monthnor[ (currentdate.month -1)] + "" );
+		var node = document.createTextNode("Ingen arrangement - "+ daynor[currentdate.day] +" "+ currentdate.date+" " + monthnor[currentdate.month] + "" );
 		h1.appendChild(node);
 		div.appendChild(h1);
 	} else {
 		var div = document.getElementById(divID);
 		var h1 = document.createElement("h1");
-		var node = document.createTextNode(""+ (currentdate.date + trackID) +" " + monthnor[ (currentdate.month -1 )] + "" );
+		var node = document.createTextNode(""+ currentdate.date +" " + monthnor[currentdate.month] + "" );
 		h1.appendChild(node);
 		div.appendChild(h1);
 		for (var i = 0; i < catcher.length; i++) {
