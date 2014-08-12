@@ -117,7 +117,7 @@ function display(divID, trackID) {
 		node = document.createTextNode("Rom: " + catcher[i].sted + "");
 		prom.appendChild(node);
 		var pstartslutt = document.createElement("p");
-		node = document.createTextNode("Starter: " + catcher[i].starter + " Slutter: " + catcher[i].slutt +"  " + catcher[i].datostart + "");
+		node = document.createTextNode("Starter: " + catcher[i].starter + " Slutter: " + catcher[i].slutt +"");
 		pstartslutt.appendChild(node);
 		div.appendChild(h1);
 		div.appendChild(prom);
